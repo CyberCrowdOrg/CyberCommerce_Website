@@ -1,0 +1,8 @@
+
+#walletconnect-wrapper {
+    font-size: 16px!important;
+}
+
+.walletconnect-qrcode__image{
+    width:calc(100% - 100px)!important;
+}

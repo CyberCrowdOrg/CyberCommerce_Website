@@ -1,0 +1,28 @@
+/*
+@font-face {
+    !*给字体命名*!
+    font-family: 'PoppinsBold';
+    !*引入字体文件*!
+    src: url('../font/PoppinsBold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    !*给字体命名*!
+    font-family: 'PoppinsMedium';
+    !*引入字体文件*!
+    src: url('../font/PoppinsMedium.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    !*给字体命名*!
+    font-family: 'PoppinsRegular';
+    !*引入字体文件*!
+    src: url('../font/PoppinsRegular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+*/

@@ -1,0 +1,123 @@
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.justify-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+.justify-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.justify-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.justify-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.justify-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.items-start {
+    display: flex;
+    align-items: flex-start;
+}
+
+.items-center {
+    display: flex;
+    align-items: center;
+}
+
+.items-end {
+    display: flex;
+    align-items: flex-end;
+}
+
+.clearfix::before,
+.clearfix::after {
+    content: "";
+    display: table;
+}
+
+.clearfix::after {
+    clear: both;
+}
+
+.toe {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.toe1 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+}
+
+.toe2 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+}
+
+.toe3 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+}
+
+.toe4 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+}
+
+
+
+

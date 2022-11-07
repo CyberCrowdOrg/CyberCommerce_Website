@@ -1,0 +1,10 @@
+
+$vxe-table-border-color: #E9F1FF;
+$vxe-font-color: #020027;
+
+@import 'vxe-table/styles/index.scss';
+
+//右侧边框的问题
+.col--last{
+  background-size:0 100%,100% 1px!important;
+}
