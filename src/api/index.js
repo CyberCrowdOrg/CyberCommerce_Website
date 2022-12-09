@@ -176,7 +176,18 @@ export function createPaymentOrder (data) {
     return commonRequest({
         url: "/pay/v1/create.order",
         method:"post",
-        showCustomLoading:false,
+        showCustomLoading:true,
+        data
+    })
+}
+
+//预下单接口
+export function preOrder (data) {
+    return commonRequest({
+        baseURL: 'https://pay.cybercrowd.store/cyberpay-gateway',
+        url: "/crypto/v1/pre-order",
+        method:"post",
+        showCustomLoading:true,
         data
     })
 }

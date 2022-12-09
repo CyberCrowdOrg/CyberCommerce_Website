@@ -34,15 +34,17 @@ simpleInstance.interceptors.request.use(
         // token && (config.headers.Authorization = token)
 
         if (!config.showCustomLoading){
+            console.log("showLoading")
             showLoading();
         }
 
         if (config.method === 'post') {
             if (config.url === "/user/v1/login") {
-
+                //登录
                 config.headers["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8;";
 
             } else if (
+                //上传文件
                 config.url === "/proposal/v1/create" ||
                 config.url === "/dao/v1/nftMinit" ||
                 config.url === "/task/v1/groupon.publish" ||
@@ -53,7 +55,7 @@ simpleInstance.interceptors.request.use(
                 config.headers["Content-Type"] = "multipart/form-data;";
 
             } else {
-
+                //其他接口
                 config.headers["Mvp_Token"] = Cookies.get("Mvp_Token");
                 config.headers["Content-Type"] = "application/json;charset=UTF-8;";
                 config.data = JSON.stringify(config.data);
@@ -77,15 +79,15 @@ simpleInstance.interceptors.response.use(
         hideLoading();
         console.log("response", response)
         //响应成功
-        if (response.data.returnCode !== "0000") {
-            Message.error(response.data.returnMsg);
-        } else {
+        if (response.data.returnCode === "0000" || response.data.code === "SUCCESS") {
             if (response.data && response.config.url === "/user/v1/login"){
                 if (response.data.data.loginToken){
                     Cookies.set('Mvp_Token', response.data.data.loginToken);
                 }
             }
             return response.data;
+        } else {
+            Message.error(response.data.returnMsg);
         }
     },
     (error) => {

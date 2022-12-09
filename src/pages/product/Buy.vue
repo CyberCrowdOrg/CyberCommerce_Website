@@ -51,7 +51,7 @@
 <script>
 import {scrollToY} from "@/utils";
 import PaymentDialog from "./PaymentDialog.vue";
-import {createOrder, createPaymentOrder, getProductDetail, paymentChannel} from "@/api";
+import {createOrder, createPaymentOrder, paymentChannel, preOrder} from "@/api";
 import {Loading} from "element-ui";
 
 export default {
@@ -125,7 +125,7 @@ export default {
     this.groupId = this.$route.query.groupId
     this.type = this.$route.query.type
     this.getProductDetail();
-    this.getPaymentMethod();
+    // this.getPaymentMethod();
   },
   methods: {
     getProductDetail(){
@@ -166,6 +166,7 @@ export default {
       });
     },
     createOrder(){
+      this.showCustomLoading();
       let task
       let orderType
       if (this.type === "group") {
@@ -180,9 +181,38 @@ export default {
         console.log(JSON.stringify(res, null, 4))
         if (res){
           this.orderNo = res.data.orderNo
-          this.showPaymentDialog = true;
+          // this.showPaymentDialog = true;
+          this.goToCheckout()
         }
       })
+    },
+    goToCheckout(){
+      let url = window.location.origin+"/user/transaction";
+      let requestBody = {
+        merchantId: "M20221103200000000001",
+        bizOrderType: "payment",
+        orderNo: this.orderNo,
+        orderAmount: 1,
+        orderCoin: "USD",
+        redirectUrl: url,
+        sign: "xxxxxxxxxxxxx",
+      };
+      preOrder(requestBody).then(res => {
+        console.log(JSON.stringify(res, null, 4))
+        if (res.code === "SUCCESS") {
+          window.location.href = res.link;
+        }
+        this.hideCustomLoading();
+      })
+
+      // this.$router.push({
+      //   path: "/product/checkout",
+      //   query: {
+      //     amount: this.totalAmount,
+      //     orderNo:this.orderNo,
+      //     coinName:coinName
+      //   },
+      // })
     },
     onPay(params){
       this.showPaymentDialog = false;
@@ -195,7 +225,7 @@ export default {
         console.log(JSON.stringify(res, null, 4))
         if (res){
           // this.$router.replace({path: "/user/transaction"}).catch(()=>{});
-          this.goToCheckout(params[2])
+          //this.goToCheckout(params[2])
         }
         // this.hideCustomLoading()
       }).catch(error => {
@@ -203,27 +233,18 @@ export default {
         console.log("error",error)
       })
     },
-    goToCheckout(coinName){
-      this.$router.push({
-        path: "/product/checkout",
-        query: {
-          amount: this.totalAmount,
-          orderNo:this.orderNo,
-          coinName:coinName
-        },
-      })
-    },
-    showCustomLoading(paymentType){
-      let text = paymentType === "crypto"?"Blockchain confirming...":"Paying..."
-      this.customLoading = Loading.service(
-          {
-            fullscreen: true,
-            spinner:"block-spinner",
-            // text:"正在铸造中...",
-            text:text,
-            customClass:"custom-block-spinner"
-          }
-      )
+    showCustomLoading(){
+      // let text = paymentType === "crypto"?"Blockchain confirming...":"Paying..."
+      // this.customLoading = Loading.service(
+      //     {
+      //       fullscreen: true,
+      //       spinner:"block-spinner",
+      //       // text:"正在铸造中...",
+      //       text:text,
+      //       customClass:"custom-block-spinner"
+      //     }
+      // )
+      this.customLoading = Loading.service({ fullscreen: true });
     },
     hideCustomLoading(){
       if (this.customLoading){
